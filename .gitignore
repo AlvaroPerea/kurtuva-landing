@@ -1,0 +1,4 @@
+*.bak
+*.bak.*
+*.bak[0-9]*
+idrac.json
