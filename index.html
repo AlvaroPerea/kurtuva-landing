@@ -222,34 +222,51 @@
   }
 
   /* SECCIONES */
-  section { margin-bottom: 64px; }
+  section { margin-bottom: 80px; }
 
   .section-header {
     display: flex;
-    align-items: baseline;
+    align-items: center;
     gap: 16px;
     margin-bottom: 32px;
+    padding-top: 36px;
+    position: relative;
+  }
+
+  .section-header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--accent-2) 40%, transparent 100%);
+    box-shadow: 0 0 12px rgba(95, 255, 236, 0.35), 0 0 24px rgba(255, 77, 255, 0.15);
   }
 
   .section-header h2 {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.6rem;
-    font-weight: 600;
-    letter-spacing: -0.02em;
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    background: linear-gradient(90deg, var(--text) 60%, var(--accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
 
   .section-header .marker {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     color: var(--accent);
     letter-spacing: 0.2em;
+    opacity: 0.7;
+    flex-shrink: 0;
   }
 
   .section-header .divider {
     flex: 1;
     height: 1px;
     background: linear-gradient(90deg, var(--border-strong), transparent);
-    margin-left: 16px;
+    margin-left: 8px;
   }
 
   .section-header .count {
@@ -268,9 +285,9 @@
   /* CARD MÁQUINA */
   .card {
     position: relative;
-    background: linear-gradient(180deg, rgba(11, 17, 25, 0.85) 0%, rgba(18, 26, 38, 0.85) 100%);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.03) 100%);
+    backdrop-filter: blur(24px) saturate(160%);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
     border: 1px solid var(--border);
     border-radius: 14px;
     padding: 0;
@@ -369,7 +386,9 @@
 
   .card-tech .label { color: var(--text-dim); letter-spacing: 0.05em; }
   .card-tech .value { color: var(--text); }
-  .card-tech .ip { color: var(--accent); }
+  .card-tech .ip { color: var(--text-muted); font-size: 0.72rem; }
+  .fqdn-main { display: block; color: var(--accent); font-size: 0.78rem; margin-bottom: 1px; }
+  .ip-sub { display: block; color: var(--text-dim); font-size: 0.63rem; }
 
   .card-fn {
     padding: 16px 20px 18px;
@@ -406,6 +425,34 @@
     font-size: 0.7rem;
   }
 
+  /* ── Resource usage bars ── */
+  .res-bars {
+    display: flex; flex-direction: column; gap: 5px;
+    padding: 10px 20px 12px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+  .res-row { display: flex; align-items: center; gap: 8px; }
+  .res-label {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.58rem;
+    color: var(--text-dim); letter-spacing: 0.08em; width: 26px; flex-shrink: 0;
+  }
+  .res-track {
+    flex: 1; height: 4px; background: rgba(255,255,255,0.07);
+    border-radius: 2px; overflow: hidden;
+  }
+  .res-fill {
+    height: 100%; border-radius: 2px;
+    background: var(--status-up);
+    transition: width 0.6s ease, background 0.3s;
+  }
+  .res-fill.warn { background: var(--status-warn); }
+  .res-fill.crit { background: var(--status-down); box-shadow: 0 0 6px var(--status-down); }
+  .res-val {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.6rem;
+    color: var(--text-muted); width: 34px; text-align: right; flex-shrink: 0;
+  }
+  .res-val.warn { color: var(--status-warn); }
+  .res-val.crit { color: var(--status-down); font-weight: 700; }
   .card-hint {
     padding: 10px 20px 14px;
     font-family: 'JetBrains Mono', monospace;
@@ -451,9 +498,9 @@
   /* CARD UI */
   .ui-card {
     position: relative;
-    background: linear-gradient(180deg, rgba(11, 17, 25, 0.85) 0%, rgba(18, 26, 38, 0.85) 100%);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.03) 100%);
+    backdrop-filter: blur(24px) saturate(160%);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
     border: 1px solid var(--border);
     border-radius: 14px;
     padding: 20px;
@@ -633,7 +680,9 @@
     width: 100%;
     max-width: 720px;
     max-height: 90vh;
-    background: linear-gradient(180deg, rgba(11, 17, 25, 0.95) 0%, rgba(18, 26, 38, 0.95) 100%);
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.09) 0%, rgba(255, 255, 255, 0.04) 100%);
+    backdrop-filter: blur(32px) saturate(180%);
+    -webkit-backdrop-filter: blur(32px) saturate(180%);
     border: 1px solid var(--border-strong);
     border-radius: 18px;
     overflow: hidden;
@@ -878,6 +927,79 @@
     .modal-name { font-size: 1.6rem; }
     .modal-header, .modal-body { padding-left: 24px; padding-right: 24px; }
   }
+  @media (max-width: 600px) {
+    .modal-backdrop { padding: 12px 8px; align-items: flex-end; }
+    .modal { max-height: 95dvh; border-radius: 18px 18px 0 0; }
+    .modal-header { padding: 20px 16px 14px; }
+    .modal-body { padding: 14px 16px 24px; }
+    .modal-name { font-size: 1.35rem; }
+    .iframe-topbar { flex-wrap: wrap; min-height: auto; padding: 8px 10px; gap: 6px; }
+    .iframe-title { min-width: 100%; order: -1; }
+  }
+
+  /* ========== ARCHITECTURE LAYERS ========== */
+  .layer {
+    position: relative; border-radius: 20px;
+    padding: 24px 28px 32px; margin-bottom: 0;
+  }
+  .layer .section-header { padding-top: 20px; margin-top: 6px; }
+  .layer-num {
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--layer-color); color: #060a10;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; align-self: center;
+  }
+  .layer .section-header::before {
+    background: linear-gradient(90deg, var(--layer-color) 0%, transparent 70%);
+    box-shadow: 0 0 16px var(--layer-color); opacity: 0.5;
+  }
+  .layer .section-header h2 {
+    background: linear-gradient(90deg, var(--text) 50%, var(--layer-color));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .layer-0 { --layer-color: #ff8c42; border: 1px solid rgba(255,140,66,0.22);
+    background: linear-gradient(160deg, rgba(255,140,66,0.07) 0%, rgba(255,140,66,0.01) 100%); }
+  .layer-1 { --layer-color: #5fffec; border: 1px solid rgba(95,255,236,0.18);
+    background: linear-gradient(160deg, rgba(95,255,236,0.05) 0%, rgba(95,255,236,0.01) 100%); }
+  .layer-2 { --layer-color: #a78bfa; border: 1px solid rgba(167,139,250,0.2);
+    background: linear-gradient(160deg, rgba(167,139,250,0.07) 0%, rgba(167,139,250,0.01) 100%); }
+  .layer-3 { --layer-color: #60a5fa; border: 1px solid rgba(96,165,250,0.2);
+    background: linear-gradient(160deg, rgba(96,165,250,0.07) 0%, rgba(96,165,250,0.01) 100%); }
+  .layer-4 { --layer-color: #4ade80; border: 1px solid rgba(74,222,128,0.18);
+    background: linear-gradient(160deg, rgba(74,222,128,0.05) 0%, rgba(74,222,128,0.01) 100%); }
+  .card.ai-agent {
+    background: linear-gradient(160deg, rgba(167,139,250,0.13) 0%, rgba(167,139,250,0.05) 100%);
+    border-color: rgba(167,139,250,0.4);
+  }
+  .card.ai-agent:hover { box-shadow: 0 0 36px rgba(167,139,250,0.22); border-color: rgba(167,139,250,0.6); }
+  .card.ai-agent .card-head { border-bottom-color: rgba(167,139,250,0.25); }
+  .layer-flow {
+    position: relative; height: 52px;
+    display: flex; justify-content: center; align-items: stretch;
+    margin: 4px 0;
+  }
+  .flow-pipe {
+    width: 2px; position: relative; overflow: hidden;
+    background: linear-gradient(180deg, var(--pipe-top, rgba(255,255,255,0.15)), var(--pipe-bot, rgba(255,255,255,0.15)));
+  }
+  .flow-pipe::after {
+    content: ''; position: absolute;
+    left: 0; width: 100%; height: 24px;
+    background: linear-gradient(180deg, transparent, var(--pipe-glow, rgba(255,255,255,0.8)), transparent);
+    animation: flowSlide 1.8s ease-in-out infinite; opacity: 0.8;
+  }
+  @keyframes flowSlide { 0% { top: -24px; } 100% { top: calc(100% + 24px); } }
+  .flow-label {
+    position: absolute; right: 28px; top: 50%; transform: translateY(-50%);
+    font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; letter-spacing: 0.2em;
+    color: var(--pipe-glow, rgba(255,255,255,0.3)); opacity: 0.55; white-space: nowrap;
+  }
+  .layer-uis { margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.05); }
+  .layer-uis-label {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.58rem;
+    letter-spacing: 0.15em; color: var(--layer-color); opacity: 0.5; margin-bottom: 12px;
+  }
   /* ========== IFRAME EMBED ========== */
   @keyframes spin { to { transform: rotate(360deg); } }
   .iframe-backdrop {
@@ -946,42 +1068,77 @@
     </div>
   </header>
 
-  <section>
+  <!-- ── CAPA 0: HARDWARE ── -->
+  <div class="layer layer-0">
     <div class="section-header">
-      <span class="marker">[01]</span>
-      <h2>Máquinas</h2>
-      <span class="divider"></span>
-      <span class="count" id="machines-count">— units</span>
+      <span class="layer-num">0</span><h2>Hardware</h2>
+      <span class="divider"></span><span class="count" id="count-l0"></span>
     </div>
-    <div class="grid" id="machines-grid"></div>
-  </section>
+    <div class="grid" id="grid-l0"></div>
+    <div class="layer-uis"><div class="layer-uis-label">// INTERFACES</div><div class="grid" id="uis-l0"></div></div>
+  </div>
 
-  <section>
+  <div class="layer-flow" style="--pipe-top:rgba(255,140,66,0.6);--pipe-bot:rgba(95,255,236,0.6);--pipe-glow:rgba(255,190,80,0.9)">
+    <div class="flow-pipe"></div><span class="flow-label">virtualización</span>
+  </div>
+
+  <!-- ── CAPA 1: PLATAFORMA ── -->
+  <div class="layer layer-1">
     <div class="section-header">
-      <span class="marker">[02]</span>
-      <h2>Desarrollo</h2>
-      <span class="divider"></span>
-      <span class="count" id="dev-count">— tools</span>
+      <span class="layer-num">1</span><h2>Plataforma</h2>
+      <span class="divider"></span><span class="count" id="count-l1"></span>
     </div>
-    <div class="grid" id="dev-grid"></div>
-  </section>
+    <div class="grid" id="grid-l1"></div>
+    <div class="layer-uis"><div class="layer-uis-label">// INTERFACES</div><div class="grid" id="uis-l1"></div></div>
+  </div>
 
-  <section>
+  <div class="layer-flow" style="--pipe-top:rgba(95,255,236,0.6);--pipe-bot:rgba(167,139,250,0.6);--pipe-glow:rgba(130,210,240,0.9)">
+    <div class="flow-pipe"></div><span class="flow-label">servicios de soporte</span>
+  </div>
+
+  <!-- ── CAPA 2: INFRAESTRUCTURA ── -->
+  <div class="layer layer-2">
     <div class="section-header">
-      <span class="marker">[03]</span>
-      <h2>Servicios</h2>
-      <span class="divider"></span>
-      <span class="count" id="ui-count">— endpoints</span>
+      <span class="layer-num">2</span><h2>Infraestructura</h2>
+      <span class="divider"></span><span class="count" id="count-l2"></span>
     </div>
-    <div class="grid" id="ui-grid"></div>
-  </section>
+    <div class="grid" id="grid-l2"></div>
+    <div class="layer-uis"><div class="layer-uis-label">// INTERFACES</div><div class="grid" id="uis-l2"></div></div>
+  </div>
 
-  <section>
+  <div class="layer-flow" style="--pipe-top:rgba(167,139,250,0.6);--pipe-bot:rgba(96,165,250,0.6);--pipe-glow:rgba(180,160,255,0.9)">
+    <div class="flow-pipe"></div><span class="flow-label">entorno de desarrollo</span>
+  </div>
+
+  <!-- ── CAPA 3: DESARROLLO ── -->
+  <div class="layer layer-3">
     <div class="section-header">
-      <span class="marker">[04]</span>
-      <h2>Voz · Próximamente</h2>
-      <span class="divider"></span>
-      <span class="count" id="voice-count">— consoles</span>
+      <span class="layer-num">3</span><h2>Desarrollo</h2>
+      <span class="divider"></span><span class="count" id="count-l3"></span>
+    </div>
+    <div class="grid" id="grid-l3"></div>
+    <div class="layer-uis"><div class="layer-uis-label">// HERRAMIENTAS</div><div class="grid" id="uis-l3"></div></div>
+  </div>
+
+  <div class="layer-flow" style="--pipe-top:rgba(96,165,250,0.6);--pipe-bot:rgba(74,222,128,0.6);--pipe-glow:rgba(100,200,200,0.9)">
+    <div class="flow-pipe"></div><span class="flow-label">despliegue a producción</span>
+  </div>
+
+  <!-- ── CAPA 4: PRODUCCIÓN ── -->
+  <div class="layer layer-4">
+    <div class="section-header">
+      <span class="layer-num">4</span><h2>Producción</h2>
+      <span class="divider"></span><span class="count" id="count-l4"></span>
+    </div>
+    <div class="grid" id="grid-l4"></div>
+    <div class="layer-uis"><div class="layer-uis-label">// SERVICIOS</div><div class="grid" id="uis-l4"></div></div>
+  </div>
+
+  <!-- ── VOZ ── -->
+  <section style="margin-top:56px">
+    <div class="section-header">
+      <span class="marker">[V]</span><h2>Voz · Próximamente</h2>
+      <span class="divider"></span><span class="count" id="voice-count">— consoles</span>
     </div>
     <div class="grid" id="voice-grid"></div>
   </section>
@@ -1175,12 +1332,26 @@ const machines = [
     features: ['Caddy sirve HTML estático con TLS interno', 'Status checks en vivo desde el navegador', 'Diseño command-center sin frameworks', 'Vanilla JS, Space Grotesk + JetBrains Mono + Inter', 'Fondo aurora animado CSS con grano SVG'] },
 ];
 
-const allUis = machines.flatMap(m => (m.uis || []).map(u => ({ ...u, machine: m.name, ip: m.ip })));
 
-// Categorización por nombre/url
-const DEV_URLS = ['http://192.168.10.176:8443', 'http://192.168.10.176:8090/_/', 'https://192.168.10.176', 'https://abaco-dev.kurtuva.com'];
-const devUis = allUis.filter(u => DEV_URLS.includes(u.url));
-const uis = allUis.filter(u => !DEV_URLS.includes(u.url));
+function getFqdn(m) {
+  const u = (m.uis || []).find(u => u.url && u.url.includes('.kurtuva.com'));
+  if (!u) return null;
+  try { return new URL(u.url).hostname; } catch { return null; }
+}
+
+// Asignación de máquinas a capas
+const LAYER_MAP = {
+  'R720': 0,
+  '501': 1, '403': 1,
+  '110': 2, '400': 2, '401': 2, '405': 2, '600': 2, '301': 2, '300': 2,
+  '505': 3, '200': 3,
+  '502': 4, '201': 4, '101': 4, '102': 4, '408': 4, '409': 4, '404': 4, '406': 4, '407': 4,
+};
+const AI_AGENTS = new Set(['301', '300', '600']);
+
+machines.forEach((m, i) => { m._idx = i; });
+
+const allUis = machines.flatMap(m => (m.uis || []).map(u => ({ ...u, machine: m.name, ip: m.ip, mid: m.id })));
 
 // Voice consoles — placeholders
 const voiceUis = [
@@ -1191,10 +1362,9 @@ const voiceUis = [
 // =========================
 //  RENDER GRIDS
 // =========================
-function renderMachines() {
-  const grid = document.getElementById('machines-grid');
-  grid.innerHTML = machines.map((m, i) => `
-    <article class="card" data-idx="${i}" data-probe="${m.probe || ''}">
+function machineCardHTML(m) {
+  return `
+    <article class="card${AI_AGENTS.has(m.id) ? ' ai-agent' : ''}" data-idx="${m._idx}" data-probe="${m.probe || ''}">
       <div class="card-head">
         <div class="name-block">
           <span class="status-dot" data-status></span>
@@ -1203,7 +1373,7 @@ function renderMachines() {
         <span class="vmid">${m.vmid}</span>
       </div>
       <div class="card-tech">
-        <span class="label">IP</span><span class="value ip">${m.ip}</span>
+        <span class="label">IP</span><span class="value ip">${getFqdn(m) ? `<span class="fqdn-main">${getFqdn(m)}</span><span class="ip-sub">${m.ip}</span>` : m.ip}</span>
         <span class="label">CPU</span><span class="value">${m.cores} cores</span>
         <span class="label">RAM</span><span class="value">${m.ram}</span>
         <span class="label">DISK</span><span class="value">${m.storage}</span>
@@ -1215,15 +1385,32 @@ function renderMachines() {
           ${m.features.slice(0, 3).map(f => `<li>${f}</li>`).join('')}
         </ul>
       </div>
+      <div class="res-bars" id="res-${m.id}" style="display:none">
+        <div class="res-row"><span class="res-label">CPU</span><div class="res-track"><div class="res-fill" data-bar="cpu" style="width:0%"></div></div><span class="res-val" data-val="cpu">—</span></div>
+        <div class="res-row"><span class="res-label">MEM</span><div class="res-track"><div class="res-fill" data-bar="mem" style="width:0%"></div></div><span class="res-val" data-val="mem">—</span></div>
+        <div class="res-row"><span class="res-label">DSK</span><div class="res-track"><div class="res-fill" data-bar="disk" style="width:0%"></div></div><span class="res-val" data-val="disk">—</span></div>
+      </div>
       ${m.id === 'R720' ? `<div class="idrac-live" data-idrac-live><span class="lbl">iDRAC live</span><span class="val" data-k="state">—</span><span class="lbl">power</span><span class="val" data-k="power">—</span><span class="lbl">inlet</span><span class="val" data-k="inlet">—</span><span class="lbl">cpu</span><span class="val" data-k="cpu">—</span><span class="lbl">fans</span><span class="val" data-k="fans">—</span><span class="ts" data-k="ts"></span></div>` : ''}
       <div class="card-hint">click para detalle completo</div>
-    </article>
-  `).join('');
+    </article>`;
+}
 
+function renderMachines() {
+  for (let n = 0; n <= 4; n++) {
+    const ms = machines.filter(m => (LAYER_MAP[m.id] ?? 99) === n);
+    const g = document.getElementById('grid-l' + n);
+    if (g) g.innerHTML = ms.map(machineCardHTML).join('');
+    const lbl = document.getElementById('count-l' + n);
+    if (lbl) lbl.textContent = ms.length + ' units';
+    // Ocultar bloque de interfaces si está vacío
+    const uiDiv = document.getElementById('uis-l' + n);
+    if (uiDiv) {
+      const uisForLayer = allUis.filter(u => (LAYER_MAP[u.mid] ?? 99) === n);
+      if (uisForLayer.length === 0) uiDiv.closest('.layer-uis').style.display = 'none';
+    }
+  }
   document.getElementById('stat-total').textContent = machines.length;
-  document.getElementById('machines-count').textContent = `${machines.length} units`;
-
-  grid.querySelectorAll('.card').forEach(card => {
+  document.querySelectorAll('.card[data-idx]').forEach(card => {
     card.addEventListener('click', () => openModal(parseInt(card.dataset.idx, 10)));
   });
 }
@@ -1259,13 +1446,13 @@ function uiCardHTML(u) {
 }
 
 function renderUis() {
-  document.getElementById('dev-grid').innerHTML = devUis.map(uiCardHTML).join('');
-  document.getElementById('ui-grid').innerHTML = uis.map(uiCardHTML).join('');
+  for (let n = 0; n <= 4; n++) {
+    const layerUis = allUis.filter(u => (LAYER_MAP[u.mid] ?? 99) === n);
+    const g = document.getElementById('uis-l' + n);
+    if (g) g.innerHTML = layerUis.map(uiCardHTML).join('');
+  }
+  document.getElementById('stat-uis').textContent = allUis.length;
   document.getElementById('voice-grid').innerHTML = voiceUis.map(uiCardHTML).join('');
-
-  document.getElementById('stat-uis').textContent = devUis.length + uis.length;
-  document.getElementById('dev-count').textContent = `${devUis.length} tools`;
-  document.getElementById('ui-count').textContent = `${uis.length} endpoints`;
   document.getElementById('voice-count').textContent = `${voiceUis.length} consoles`;
 }
 
@@ -1297,13 +1484,68 @@ setTimeout(refreshIdrac, 500);
 setInterval(refreshIdrac, 60000);
 
 // =========================
+//  VM RESOURCE STATS
+// =========================
+// vmid (number) → machine.id string  (R720 is the node, handled separately)
+const _vmidToMid = {};
+machines.forEach(m => { if (m.id !== 'R720') _vmidToMid[parseInt(m.id, 10)] = m.id; });
+
+function _fillBar(container, key, pct) {
+  const fill = container.querySelector(`[data-bar="${key}"]`);
+  const val  = container.querySelector(`[data-val="${key}"]`);
+  if (!fill || !val) return;
+  const cls = pct >= 85 ? 'crit' : pct >= 65 ? 'warn' : '';
+  fill.style.width = Math.min(pct, 100) + '%';
+  fill.className = 'res-fill' + (cls ? ' ' + cls : '');
+  val.textContent = pct.toFixed(0) + '%';
+  val.className = 'res-val' + (cls ? ' ' + cls : '');
+}
+
+async function refreshVmStats() {
+  try {
+    const data = await fetch('/vmstats.json?t=' + Date.now()).then(r => r.json());
+
+    // Node (R720)
+    const nodeEl = document.getElementById('res-R720');
+    if (nodeEl) {
+      nodeEl.style.display = '';
+      _fillBar(nodeEl, 'cpu',  data.node.cpu);
+      _fillBar(nodeEl, 'mem',  data.node.mem);
+      // disk row not applicable at node level — hide it
+      const dskRow = nodeEl.querySelector('[data-bar="disk"]')?.closest('.res-row');
+      if (dskRow) dskRow.style.display = 'none';
+    }
+
+    // CTs and VMs
+    (data.vms || []).forEach(vm => {
+      const mid = _vmidToMid[vm.vmid];
+      if (!mid) return;
+      const el = document.getElementById('res-' + mid);
+      if (!el) return;
+      if (vm.status !== 'running') return;
+      el.style.display = '';
+      _fillBar(el, 'cpu',  vm.cpu);
+      _fillBar(el, 'mem',  vm.mem);
+      _fillBar(el, 'disk', vm.disk);
+    });
+  } catch(e) {}
+}
+
+setTimeout(refreshVmStats, 800);
+setInterval(refreshVmStats, 60000);
+
+// =========================
 //  MODAL
 // =========================
 function openModal(idx) {
   const m = machines[idx];
   document.getElementById('modal-vmid').textContent = m.vmid;
   document.getElementById('modal-name').textContent = m.name;
-  document.getElementById('modal-ip').textContent = m.ip;
+  const fqdn = getFqdn(m);
+  const ipEl = document.getElementById('modal-ip');
+  ipEl.innerHTML = fqdn
+    ? `<span style="color:var(--accent)">${fqdn}</span> <span style="color:var(--text-dim);font-size:0.8rem">${m.ip}</span>`
+    : m.ip;
 
   // copiar estado del dot original
   const srcDot = document.querySelector(`.card[data-idx="${idx}"] [data-status]`);
@@ -1395,6 +1637,7 @@ function openIframe(url, name) {
   el.src = url;
   document.getElementById('iframe-backdrop').classList.add('open');
   document.body.style.overflow = 'hidden';
+  history.pushState({ iframe: url, name }, '', url);
 }
 
 function closeIframe() {
@@ -1402,10 +1645,19 @@ function closeIframe() {
   document.getElementById('iframe-backdrop').classList.remove('open');
   document.body.style.overflow = '';
   setTimeout(() => { document.getElementById('iframe-el').src = ''; }, 300);
+  if (history.state && history.state.iframe) history.back();
 }
 
 document.getElementById('iframe-close-btn').addEventListener('click', closeIframe);
 document.getElementById('iframe-tab-btn').addEventListener('click', () => window.open(_iframeUrl, '_blank'));
+
+window.addEventListener('popstate', () => {
+  if (document.getElementById('iframe-backdrop').classList.contains('open')) {
+    document.getElementById('iframe-backdrop').classList.remove('open');
+    document.body.style.overflow = '';
+    setTimeout(() => { document.getElementById('iframe-el').src = ''; }, 300);
+  }
+});
 
 // =========================
 //  STATUS PROBES
@@ -1451,155 +1703,343 @@ setInterval(updateClock, 1000);
 probeAll();
 setInterval(probeAll, 30000);
 
-// ── WebGL fluid smoke shader ────────────────────────────────────────────────
-// Simula humo verde turbulento reactivo al ratón usando GLSL en GPU.
-// Sin dependencias externas — WebGL nativo.
-(function() {
-    var canvas = document.getElementById('smoke-canvas');
-    var gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-    if (!gl) return; // fallback: sin efecto, fondo negro del body
+// ── WebGL Fluid Simulation (Navier-Stokes) ──────────────────────────────────
+(function () {
 
-    // ── Vertex shader: quad a pantalla completa ──────────────────────────────
-    var VS = [
-        'attribute vec2 a_pos;',
-        'void main() { gl_Position = vec4(a_pos, 0.0, 1.0); }'
-    ].join('\n');
+var canvas = document.getElementById('smoke-canvas');
+var gl = canvas.getContext('webgl2');
+var isGL2 = !!gl;
+if (!gl) gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+if (!gl) return;
 
-    // ── Fragment shader: ruido simplex + advección del cursor ────────────────
-    // Paleta: negros profundos → verdes esmeralda → verde-cyan tenue
-    var FS = [
-        'precision mediump float;',
-        'uniform float u_time;',
-        'uniform vec2  u_res;',
-        'uniform vec2  u_mouse;',
-        'uniform vec2  u_vel;',
+var halfType, FMT, linearF;
+if (isGL2) {
+    gl.getExtension('EXT_color_buffer_float');
+    halfType = gl.HALF_FLOAT;
+    FMT      = { i: gl.RGBA16F, f: gl.RGBA };
+    linearF  = gl.LINEAR;
+} else {
+    var _hf = gl.getExtension('OES_texture_half_float');
+    gl.getExtension('OES_texture_half_float_linear');
+    gl.getExtension('WEBGL_color_buffer_float') || gl.getExtension('EXT_color_buffer_half_float');
+    halfType = _hf ? _hf.HALF_FLOAT_OES : gl.UNSIGNED_BYTE;
+    FMT      = { i: gl.RGBA, f: gl.RGBA };
+    linearF  = _hf ? gl.LINEAR : gl.NEAREST;
+}
 
-        'vec2 hash2(vec2 p) {',
-        '  p = vec2(dot(p,vec2(127.1,311.7)), dot(p,vec2(269.5,183.3)));',
-        '  return -1.0 + 2.0*fract(sin(p)*43758.5453);',
-        '}',
+var SIM_RES = 128, DYE_RES = 512, ITERS = 30;
+var VEL_DIS = 0.99, DYE_DIS = 0.98, CURL = 30, FORCE = 6000;
 
-        'float gnoise(vec2 p) {',
-        '  vec2 i = floor(p), f = fract(p);',
-        '  vec2 u = f*f*(3.0-2.0*f);',
-        '  return mix(',
-        '    mix(dot(hash2(i),           f),           dot(hash2(i+vec2(1,0)), f-vec2(1,0)), u.x),',
-        '    mix(dot(hash2(i+vec2(0,1)), f-vec2(0,1)), dot(hash2(i+vec2(1,1)), f-vec2(1,1)), u.x), u.y);',
-        '}',
+var quad = gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER, quad);
+gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,1,1]), gl.STATIC_DRAW);
+gl.enableVertexAttribArray(0);
+gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
 
-        'float fbm(vec2 p) {',
-        '  float v=0.0, a=0.55;',
-        '  mat2 R = mat2(1.7,1.3,-1.3,1.7);',
-        '  for(int i=0;i<5;i++){ v+=a*gnoise(p); p=R*p; a*=0.48; }',
-        '  return v;',
-        '}',
+var VS = 'precision highp float;attribute vec2 aP;varying vec2 vU;void main(){vU=aP*.5+.5;gl_Position=vec4(aP,0,1);}';
 
-        'void main() {',
-        '  vec2 uv = gl_FragCoord.xy / u_res;',
-        '  uv.y = 1.0 - uv.y;',
+var SPLAT_FS = [
+    'precision highp float;varying vec2 vU;',
+    'uniform sampler2D uT;uniform float uA;uniform vec3 uC;uniform vec2 uP;uniform float uR;',
+    'void main(){',
+    '  vec2 p=vU-uP;p.x*=uA;',
+    '  float sp=exp(-dot(p,p)/uR);',
+    '  gl_FragColor=vec4(texture2D(uT,vU).rgb+sp*uC,1.0);',
+    '}'
+].join('\n');
 
-        '  vec2 p = uv * 3.2;',
-        '  p.y -= u_time * 0.10;',
-        '  p.x += sin(u_time*0.12)*0.08;',
+var ADVECT_FS = [
+    'precision highp float;varying vec2 vU;',
+    'uniform sampler2D uV,uS;uniform vec2 uTS;uniform float uDt,uDis;',
+    'void main(){',
+    '  vec2 vel=texture2D(uV,vU).xy;',
+    '  vec2 pos=vU-uDt*vel*uTS;',
+    '  gl_FragColor=uDis*texture2D(uS,pos);',
+    '}'
+].join('\n');
 
-        '  float md = length(uv - u_mouse);',
-        '  p += u_vel * exp(-md*md*10.0) * 5.0;',
+var DIV_FS = [
+    'precision highp float;varying vec2 vU;',
+    'uniform sampler2D uV;uniform vec2 uTS;',
+    'void main(){',
+    '  float L=texture2D(uV,vU-vec2(uTS.x,0.0)).x;',
+    '  float R=texture2D(uV,vU+vec2(uTS.x,0.0)).x;',
+    '  float T=texture2D(uV,vU+vec2(0.0,uTS.y)).y;',
+    '  float B=texture2D(uV,vU-vec2(0.0,uTS.y)).y;',
+    '  gl_FragColor=vec4(0.5*(R-L+T-B),0.0,0.0,1.0);',
+    '}'
+].join('\n');
 
-        '  vec2 q = vec2(fbm(p), fbm(p+vec2(5.2,1.3)));',
-        '  vec2 r = vec2(fbm(p+2.0*q+vec2(1.7,9.2)), fbm(p+2.0*q+vec2(8.3,2.8)));',
-        '  float f = fbm(p + 2.5*r);',
+var CURL_FS = [
+    'precision highp float;varying vec2 vU;',
+    'uniform sampler2D uV;uniform vec2 uTS;',
+    'void main(){',
+    '  float L=texture2D(uV,vU-vec2(uTS.x,0.0)).y;',
+    '  float R=texture2D(uV,vU+vec2(uTS.x,0.0)).y;',
+    '  float T=texture2D(uV,vU+vec2(0.0,uTS.y)).x;',
+    '  float B=texture2D(uV,vU-vec2(0.0,uTS.y)).x;',
+    '  gl_FragColor=vec4(0.5*(R-L-T+B),0.0,0.0,1.0);',
+    '}'
+].join('\n');
 
-        '  f = f*0.5 + 0.5;',
-        '  f = smoothstep(0.1, 0.95, f);',
+var VORT_FS = [
+    'precision highp float;varying vec2 vU;',
+    'uniform sampler2D uV,uCurl;uniform vec2 uTS;uniform float uCS,uDt;',
+    'void main(){',
+    '  float L=texture2D(uCurl,vU-vec2(uTS.x,0.0)).x;',
+    '  float R=texture2D(uCurl,vU+vec2(uTS.x,0.0)).x;',
+    '  float T=texture2D(uCurl,vU+vec2(0.0,uTS.y)).x;',
+    '  float B=texture2D(uCurl,vU-vec2(0.0,uTS.y)).x;',
+    '  float C=texture2D(uCurl,vU).x;',
+    '  vec2 f=0.5*vec2(abs(T)-abs(B),abs(R)-abs(L));',
+    '  f/=length(f)+0.0001;',
+    '  f*=uCS*C;',
+    '  gl_FragColor=vec4(texture2D(uV,vU).xy+f*uDt,0.0,1.0);',
+    '}'
+].join('\n');
 
-        '  float e = 0.0;',
-        '  e += smoothstep(0.55, 0.0, length(uv - vec2(0.25, 1.1)))*0.8;',
-        '  e += smoothstep(0.50, 0.0, length(uv - vec2(0.72, 1.05)))*0.7;',
-        '  e += smoothstep(0.40, 0.0, length(uv - vec2(0.50, 1.02)))*0.5;',
-        '  e = clamp(e, 0.0, 1.0);',
+var PRES_FS = [
+    'precision highp float;varying vec2 vU;',
+    'uniform sampler2D uP,uD;uniform vec2 uTS;',
+    'void main(){',
+    '  float L=texture2D(uP,vU-vec2(uTS.x,0.0)).x;',
+    '  float R=texture2D(uP,vU+vec2(uTS.x,0.0)).x;',
+    '  float T=texture2D(uP,vU+vec2(0.0,uTS.y)).x;',
+    '  float B=texture2D(uP,vU-vec2(0.0,uTS.y)).x;',
+    '  float d=texture2D(uD,vU).x;',
+    '  gl_FragColor=vec4((L+R+T+B-d)*0.25,0.0,0.0,1.0);',
+    '}'
+].join('\n');
 
-        '  float smoke = clamp(f*0.75 + e*0.55, 0.0, 1.0);',
+var GRAD_FS = [
+    'precision highp float;varying vec2 vU;',
+    'uniform sampler2D uP,uV;uniform vec2 uTS;',
+    'void main(){',
+    '  float L=texture2D(uP,vU-vec2(uTS.x,0.0)).x;',
+    '  float R=texture2D(uP,vU+vec2(uTS.x,0.0)).x;',
+    '  float T=texture2D(uP,vU+vec2(0.0,uTS.y)).x;',
+    '  float B=texture2D(uP,vU-vec2(0.0,uTS.y)).x;',
+    '  gl_FragColor=vec4(texture2D(uV,vU).xy-0.5*vec2(R-L,T-B),0.0,1.0);',
+    '}'
+].join('\n');
 
-        '  smoke *= smoothstep(0.0,0.06,uv.x) * smoothstep(0.0,0.06,1.0-uv.x);',
-        '  smoke *= 1.0 - smoothstep(0.05, 0.80, 1.0-uv.y)*0.6;',
+var DISPLAY_FS = [
+    'precision highp float;varying vec2 vU;uniform sampler2D uDye;',
+    'void main(){',
+    '  float i=clamp(length(texture2D(uDye,vU).rgb)*2.0,0.0,1.0);',
+    '  vec3 c=vec3(0.024,0.039,0.063);',
+    '  c=mix(c,vec3(0.01,0.08,0.04),smoothstep(0.00,0.20,i));',
+    '  c=mix(c,vec3(0.03,0.20,0.09),smoothstep(0.15,0.35,i));',
+    '  c=mix(c,vec3(0.05,0.42,0.18),smoothstep(0.28,0.52,i));',
+    '  c=mix(c,vec3(0.10,0.68,0.30),smoothstep(0.44,0.68,i));',
+    '  c=mix(c,vec3(0.20,0.88,0.44),smoothstep(0.62,0.82,i));',
+    '  c=mix(c,vec3(0.42,1.00,0.68),smoothstep(0.78,0.94,i));',
+    '  gl_FragColor=vec4(c,1.0);',
+    '}'
+].join('\n');
 
-        '  vec3 col = vec3(0.024, 0.039, 0.063);',
-
-        '  col = mix(col, vec3(0.01,0.08,0.04),  smoothstep(0.00,0.20,smoke));',
-        '  col = mix(col, vec3(0.03,0.20,0.09),  smoothstep(0.15,0.35,smoke));',
-        '  col = mix(col, vec3(0.05,0.42,0.18),  smoothstep(0.28,0.52,smoke));',
-        '  col = mix(col, vec3(0.10,0.68,0.30),  smoothstep(0.44,0.68,smoke));',
-        '  col = mix(col, vec3(0.20,0.88,0.44),  smoothstep(0.62,0.82,smoke));',
-        '  col = mix(col, vec3(0.42,1.00,0.68),  smoothstep(0.78,0.94,smoke));',
-
-        '  gl_FragColor = vec4(col, 1.0);',
-        '}'
-    ].join('\n');
-
-    // ── Compilar shaders ─────────────────────────────────────────────────────
-    function compile(type, src) {
+function mkProg(vsSrc, fsSrc) {
+    function sh(type, src) {
         var s = gl.createShader(type);
         gl.shaderSource(s, src);
         gl.compileShader(s);
         return s;
     }
-    var prog = gl.createProgram();
-    gl.attachShader(prog, compile(gl.VERTEX_SHADER,   VS));
-    gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, FS));
-    gl.linkProgram(prog);
-    gl.useProgram(prog);
+    var p = gl.createProgram();
+    gl.attachShader(p, sh(gl.VERTEX_SHADER, vsSrc));
+    gl.attachShader(p, sh(gl.FRAGMENT_SHADER, fsSrc));
+    gl.bindAttribLocation(p, 0, 'aP');
+    gl.linkProgram(p);
+    function u(n) { return gl.getUniformLocation(p, n); }
+    return {
+        use: function()        { gl.useProgram(p); },
+        f:   function(n,v)     { gl.uniform1f(u(n),v); },
+        f2:  function(n,x,y)   { gl.uniform2f(u(n),x,y); },
+        f3:  function(n,x,y,z) { gl.uniform3f(u(n),x,y,z); },
+        i:   function(n,v)     { gl.uniform1i(u(n),v); }
+    };
+}
 
-    // ── Quad que cubre la pantalla completa ──────────────────────────────────
-    var buf = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
-    var aPos = gl.getAttribLocation(prog, 'a_pos');
-    gl.enableVertexAttribArray(aPos);
-    gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+var P = {
+    splat:   mkProg(VS, SPLAT_FS),
+    advect:  mkProg(VS, ADVECT_FS),
+    div:     mkProg(VS, DIV_FS),
+    curl:    mkProg(VS, CURL_FS),
+    vort:    mkProg(VS, VORT_FS),
+    pres:    mkProg(VS, PRES_FS),
+    grad:    mkProg(VS, GRAD_FS),
+    display: mkProg(VS, DISPLAY_FS)
+};
 
-    // ── Uniforms ─────────────────────────────────────────────────────────────
-    var uTime  = gl.getUniformLocation(prog, 'u_time');
-    var uRes   = gl.getUniformLocation(prog, 'u_res');
-    var uMouse = gl.getUniformLocation(prog, 'u_mouse');
-    var uVel   = gl.getUniformLocation(prog, 'u_vel');
+function mkFBO(w, h, filter) {
+    var tex = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, tex);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, filter);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, filter);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.texImage2D(gl.TEXTURE_2D, 0, FMT.i, w, h, 0, FMT.f, halfType, null);
+    var fbo = gl.createFramebuffer();
+    gl.bindFramebuffer(gl.FRAMEBUFFER, fbo);
+    gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, tex, 0);
+    gl.viewport(0,0,w,h);
+    gl.clear(gl.COLOR_BUFFER_BIT);
+    return {
+        fbo:fbo, tex:tex, w:w, h:h,
+        bind: function(id) {
+            gl.activeTexture(gl.TEXTURE0+id);
+            gl.bindTexture(gl.TEXTURE_2D, tex);
+            return id;
+        }
+    };
+}
 
-    // ── Seguimiento del ratón con velocidad ──────────────────────────────────
-    var mx = 0.5, my = 0.5;   // posición normalizada
-    var vx = 0.0, vy = 0.0;   // velocidad
-    var pmx = 0.5, pmy = 0.5; // posición anterior
+function mkDBL(w, h, filter) {
+    var a = mkFBO(w,h,filter), b = mkFBO(w,h,filter);
+    return { r:a, w:b, swap: function(){ var t=this.r; this.r=this.w; this.w=t; } };
+}
 
-    document.addEventListener('mousemove', function(e) {
-        pmx = mx; pmy = my;
-        mx = e.clientX / window.innerWidth;
-        my = 1.0 - e.clientY / window.innerHeight;
-        vx = (mx - pmx) * 0.4;
-        vy = (my - pmy) * 0.4;
-    });
+var vel  = mkDBL(SIM_RES, SIM_RES, linearF);
+var pres = mkDBL(SIM_RES, SIM_RES, gl.NEAREST);
+var dye  = mkDBL(DYE_RES, DYE_RES, linearF);
+var divF = mkFBO(SIM_RES, SIM_RES, gl.NEAREST);
+var curF = mkFBO(SIM_RES, SIM_RES, gl.NEAREST);
 
-    // ── Resize ───────────────────────────────────────────────────────────────
-    function resize() {
-        canvas.width  = window.innerWidth;
-        canvas.height = window.innerHeight;
+function blit(target) {
+    if (!target) {
+        gl.bindFramebuffer(gl.FRAMEBUFFER, null);
         gl.viewport(0, 0, canvas.width, canvas.height);
+    } else {
+        gl.bindFramebuffer(gl.FRAMEBUFFER, target.fbo);
+        gl.viewport(0, 0, target.w, target.h);
     }
-    window.addEventListener('resize', resize);
-    resize();
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+}
 
-    // ── Loop de renderizado ──────────────────────────────────────────────────
-    var t0 = performance.now();
-    function frame() {
-        var t = (performance.now() - t0) * 0.001;
-        // La velocidad se amortigua entre frames para un efecto más suave
-        vx *= 0.88; vy *= 0.88;
+var STS = [1.0/SIM_RES, 1.0/SIM_RES];
 
-        gl.uniform1f(uTime,  t);
-        gl.uniform2f(uRes,   canvas.width, canvas.height);
-        gl.uniform2f(uMouse, mx, my);
-        gl.uniform2f(uVel,   vx, vy);
-        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-        requestAnimationFrame(frame);
+function step(dt) {
+    gl.disable(gl.BLEND);
+
+    P.curl.use();
+    P.curl.f2('uTS', STS[0], STS[1]);
+    P.curl.i('uV', vel.r.bind(0));
+    blit(curF);
+
+    P.vort.use();
+    P.vort.f2('uTS', STS[0], STS[1]);
+    P.vort.i('uV', vel.r.bind(0));
+    P.vort.i('uCurl', curF.bind(1));
+    P.vort.f('uCS', CURL);
+    P.vort.f('uDt', dt);
+    blit(vel.w);
+    vel.swap();
+
+    P.div.use();
+    P.div.f2('uTS', STS[0], STS[1]);
+    P.div.i('uV', vel.r.bind(0));
+    blit(divF);
+
+    P.pres.use();
+    P.pres.f2('uTS', STS[0], STS[1]);
+    P.pres.i('uD', divF.bind(0));
+    for (var j=0; j<ITERS; j++) {
+        P.pres.i('uP', pres.r.bind(1));
+        blit(pres.w);
+        pres.swap();
     }
+
+    P.grad.use();
+    P.grad.f2('uTS', STS[0], STS[1]);
+    P.grad.i('uP', pres.r.bind(0));
+    P.grad.i('uV', vel.r.bind(1));
+    blit(vel.w);
+    vel.swap();
+
+    P.advect.use();
+    P.advect.f2('uTS', STS[0], STS[1]);
+    P.advect.i('uV', vel.r.bind(0));
+    P.advect.i('uS', vel.r.bind(0));
+    P.advect.f('uDt', dt);
+    P.advect.f('uDis', VEL_DIS);
+    blit(vel.w);
+    vel.swap();
+
+    P.advect.use();
+    P.advect.f2('uTS', STS[0], STS[1]);
+    P.advect.i('uV', vel.r.bind(0));
+    P.advect.i('uS', dye.r.bind(1));
+    P.advect.f('uDt', dt);
+    P.advect.f('uDis', DYE_DIS);
+    blit(dye.w);
+    dye.swap();
+}
+
+function addSplat(x, y, dx, dy) {
+    var aspect = canvas.width / canvas.height;
+    var r = 0.0018;
+    var g = Math.random()*0.4+0.5;
+    var b = Math.random()*0.15+0.05;
+
+    P.splat.use();
+    P.splat.f('uA', aspect);
+    P.splat.f2('uP', x, y);
+    P.splat.f('uR', r);
+
+    P.splat.i('uT', vel.r.bind(0));
+    P.splat.f3('uC', dx*FORCE, dy*FORCE, 0.0);
+    blit(vel.w);
+    vel.swap();
+
+    P.splat.i('uT', dye.r.bind(0));
+    P.splat.f3('uC', 0.0, g, b);
+    blit(dye.w);
+    dye.swap();
+}
+
+var mx = 0.5, my = 0.5;
+window.addEventListener('mousemove', function(e) {
+    var nx = e.clientX / window.innerWidth;
+    var ny = 1.0 - e.clientY / window.innerHeight;
+    addSplat(nx, ny, (nx-mx)*0.5, (ny-my)*0.5);
+    mx=nx; my=ny;
+});
+window.addEventListener('touchmove', function(e) {
+    var t = e.touches[0];
+    var nx = t.clientX / window.innerWidth;
+    var ny = 1.0 - t.clientY / window.innerHeight;
+    addSplat(nx, ny, (nx-mx)*0.5, (ny-my)*0.5);
+    mx=nx; my=ny;
+}, {passive:true});
+
+function ambientSplat() {
+    var x = Math.random()*0.7+0.15;
+    var y = Math.random()*0.06;
+    addSplat(x, y, (Math.random()-0.5)*0.003, Math.random()*0.007+0.004);
+}
+for (var k=0; k<6; k++) ambientSplat();
+setInterval(ambientSplat, 800);
+
+function resize() {
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resize);
+resize();
+
+var lastT = performance.now();
+function frame() {
+    var now = performance.now();
+    var dt  = Math.min((now-lastT)*0.001, 0.016);
+    lastT   = now;
+    step(dt);
+    P.display.use();
+    P.display.i('uDye', dye.r.bind(0));
+    blit(null);
     requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+
 })();
 </script>
 </body>
