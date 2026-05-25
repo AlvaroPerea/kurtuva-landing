@@ -1351,11 +1351,11 @@ const machines = [
     uis: [{ name: 'Grafana Monitoring', url: 'https://monitoring.kurtuva.com', short: 'G', cls: 'c-mon', desc: 'Dashboards de infra: CPU/RAM/discos, iDRAC temps/power, SMART, uptime de servicios' }],
     probe: 'http:https://monitoring.kurtuva.com' },
 
-  { id: '800', vmid: 'CT 800', name: 'Grok Build', ip: '192.168.10.94',
+  { id: '800', vmid: 'CT 800', name: 'Grok Build', ip: '192.168.10.97',
     cores: '2', ram: '2 GB', storage: 'sas-600gb', os: 'Debian 12',
     purpose: 'xAI Grok Build — agente de código con modelos Grok.',
     features: ['Grok Build CLI (grok / agent)', 'Modelo Grok 4 Fast vía API xAI', 'Experimental / sandbox'],
-    probe: 'ssh:192.168.10.94' },
+    probe: 'ssh:192.168.10.97' },
 
   { id: '403', vmid: 'CT 403', name: 'Kurtuva · este nodo', ip: '192.168.10.88',
     cores: '1', ram: '512 MB', storage: 'sas-600gb', os: 'Debian 12',
